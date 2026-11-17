@@ -444,6 +444,8 @@
     commitStroke();
 
     if (mode === 'camera') {
+      // The mouse dot would otherwise freeze at its last position.
+      hideCursor();
       state.mode = 'camera';
       document.body.classList.remove('pointer-mode');
       document.body.classList.add('camera-mode');
