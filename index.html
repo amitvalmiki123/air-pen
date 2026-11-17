@@ -2,18 +2,36 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="color-scheme" content="dark">
+  <meta name="description" content="Air Pen — draw glowing lines in the air with your webcam, or straight on the screen with a mouse, finger or stylus.">
   <title>Air Pen</title>
 
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%E2%9C%8D%EF%B8%8F%3C/text%3E%3C/svg%3E">
   <link rel="stylesheet" href="style.css">
-
-  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js" crossorigin="anonymous"></script>
 </head>
 
-<body>
-  <video id="video" autoplay playsinline></video>
+<body class="pointer-mode preview-on">
+  <!-- Camera preview: only visible in camera mode. -->
+  <video id="video" autoplay playsinline muted></video>
+
+  <!-- The drawing surface. Pointer events drive it when no camera is used. -->
   <canvas id="canvas"></canvas>
+
+  <div id="hud">
+    <button id="mode-btn" type="button" aria-pressed="false" title="Switch between mouse/touch and camera (M)">
+      🖱️ Mouse / Touch
+    </button>
+    <button id="clear-btn" type="button" title="Clear the canvas (Space)">Clear</button>
+    <button id="fs-btn" type="button" title="Fullscreen (F)">Fullscreen</button>
+  </div>
+
+  <p id="hint">
+    Hold <kbd>Shift</kbd> or drag to draw · <kbd>Space</kbd> clear ·
+    <kbd>F</kbd> fullscreen · <kbd>M</kbd> input · <kbd>H</kbd> hide UI
+  </p>
+
+  <p id="toast" role="status" aria-live="polite"></p>
 
   <script src="script.js"></script>
 </body>
